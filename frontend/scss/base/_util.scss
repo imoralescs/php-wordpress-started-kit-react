@@ -1,0 +1,59 @@
+/* ==========================================================================
+    MIXINS
+========================================================================== */
+@mixin desktop {
+	@media (min-width: $desktop) {
+		@content
+	}
+}
+
+@mixin tablet-landscape {
+	@media (min-width: $tablet) and (max-width: $tabletLandscape) {
+		@content
+	}
+}
+
+@mixin tablet-portrait {
+	@media (min-width: $phone + 1) {
+		@content
+	}
+}
+
+@mixin tablet {
+	@media (min-width: $tablet) {
+		@content
+	}
+}
+
+@mixin phone {
+	@media (max-width: $phone) {
+		@content
+	}
+}
+
+@mixin clearfix {
+	zoom:1;
+	&:before, &:after {
+		content: "\0020";
+		display: block;
+		height: 0;
+		overflow: hidden;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+/* Mixin to prefix a property 
+ * @param {String} $property - Property name 
+ * @param {*} $value - Property value 
+ * @param {List} $prefixes (()) - List of prefixes to print
+ */
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+ 
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
